@@ -25,13 +25,63 @@ vim.keymap.set("n", "<leader>gt", function()
   require("gitsigns").blame()
 end, { desc = "Toggle Git Blame" })
 
--- Rodar arquivo Python atual com <leader>rp (Space + r + p)
-vim.keymap.set("n", "<leader>rp", function()
-  if vim.bo.filetype == "python" then
-    vim.cmd("write") -- Salva o arquivo atual antes de rodar
-    Snacks.terminal("python3 " .. vim.fn.shellescape(vim.fn.expand("%")))
-  else
-    vim.notify("O arquivo atual não é Python!", vim.log.levels.WARN)
+-- Função genérica para rodar o arquivo atual baseado no filetype
+local function run_file()
+  local filetype = vim.bo.filetype
+  local filename = vim.fn.expand("%")
+
+  if filename == "" then
+    vim.notify("Nenhum arquivo aberto para rodar!", vim.log.levels.WARN)
+    return
   end
+
+  vim.cmd("write") -- Salva o arquivo antes de rodar
+
+  local cmd = nil
+  if filetype == "python" then
+    cmd = "python3 " .. vim.fn.shellescape(filename)
+  elseif filetype == "go" then
+    cmd = "go run " .. vim.fn.shellescape(filename)
+  elseif filetype == "rust" then
+    if vim.fn.filereadable("Cargo.toml") == 1 then
+      cmd = "cargo run"
+    else
+      cmd = "rustc " .. vim.fn.shellescape(filename) .. " -o /tmp/rust_out && /tmp/rust_out"
+    end
+  elseif filetype == "java" then
+    cmd = "java " .. vim.fn.shellescape(filename)
+  elseif filetype == "haskell" then
+    cmd = "runghc " .. vim.fn.shellescape(filename)
+  end
+
+  if cmd then
+    Snacks.terminal(cmd)
+  else
+    vim.notify("Sem runner configurado para o tipo de arquivo: " .. filetype, vim.log.levels.WARN)
+  end
+end
+
+-- Atalho geral: Rodar arquivo atual com <leader>rf (Space + r + f)
+vim.keymap.set("n", "<leader>rf", run_file, { desc = "Rodar arquivo atual" })
+
+-- Atalhos específicos para cada linguagem
+vim.keymap.set("n", "<leader>rp", function()
+  if vim.bo.filetype == "python" then run_file() else vim.notify("Não é um arquivo Python!", vim.log.levels.WARN) end
 end, { desc = "Rodar Python" })
+
+vim.keymap.set("n", "<leader>rg", function()
+  if vim.bo.filetype == "go" then run_file() else vim.notify("Não é um arquivo Go!", vim.log.levels.WARN) end
+end, { desc = "Rodar Go" })
+
+vim.keymap.set("n", "<leader>rr", function()
+  if vim.bo.filetype == "rust" then run_file() else vim.notify("Não é um arquivo Rust!", vim.log.levels.WARN) end
+end, { desc = "Rodar Rust" })
+
+vim.keymap.set("n", "<leader>rj", function()
+  if vim.bo.filetype == "java" then run_file() else vim.notify("Não é um arquivo Java!", vim.log.levels.WARN) end
+end, { desc = "Rodar Java" })
+
+vim.keymap.set("n", "<leader>rh", function()
+  if vim.bo.filetype == "haskell" then run_file() else vim.notify("Não é um arquivo Haskell!", vim.log.levels.WARN) end
+end, { desc = "Rodar Haskell" })
 
