@@ -55,7 +55,9 @@ local function run_file()
   end
 
   if cmd then
-    Snacks.terminal(cmd)
+    -- Adiciona uma pausa para manter a janela do terminal aberta até que o usuário pressione Enter
+    local run_cmd = cmd .. " ; echo ; echo 'Pressione [Enter] para fechar...' ; read"
+    Snacks.terminal(run_cmd)
   else
     vim.notify("Sem runner configurado para o tipo de arquivo: " .. filetype, vim.log.levels.WARN)
   end
