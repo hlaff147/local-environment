@@ -24,3 +24,14 @@ end, { desc = "Grep Selection" })
 vim.keymap.set("n", "<leader>gt", function()
   require("gitsigns").blame()
 end, { desc = "Toggle Git Blame" })
+
+-- Rodar arquivo Python atual com <leader>rp (Space + r + p)
+vim.keymap.set("n", "<leader>rp", function()
+  if vim.bo.filetype == "python" then
+    vim.cmd("write") -- Salva o arquivo atual antes de rodar
+    Snacks.terminal("python3 " .. vim.fn.shellescape(vim.fn.expand("%")))
+  else
+    vim.notify("O arquivo atual não é Python!", vim.log.levels.WARN)
+  end
+end, { desc = "Rodar Python" })
+
