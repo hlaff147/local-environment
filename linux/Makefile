@@ -28,7 +28,7 @@ brave:
 
 alacritty:
 	sudo dnf install alacritty
-	cp -r configs/alacritty ~/.config/
+	cp -r ../configs/alacritty ~/.config/
 
 zellij:
 	wget https://github.com/zellij-org/zellij/releases/download/$(ZELLIJ_VERSION)/zellij-x86_64-unknown-linux-musl.tar.gz -O /tmp/zellij.tar.gz
@@ -46,7 +46,7 @@ actions_for_nautilus:
 	cd actions-for-nautilus && \
 	make install
 
-	cp -r configs/actions-for-nautilus ~/.local/share/actions-for-nautilus/
+	cp -r configs/action-for-nautilus ~/.local/share/actions-for-nautilus/
 
 zshell:
 	sudo dnf install -y zsh
@@ -63,7 +63,7 @@ oh_my_zsh:
 	sh /tmp/install.sh
 
 oh_my_zsh_cfg:
-	cp configs/zsh/zshrc ~/.zshrc
+	cp ../configs/zsh/zshrc ~/.zshrc
 
 gnome-extensions:
 	brave-browser https://extensions.gnome.org/extension/3843/just-perfection/
@@ -106,7 +106,7 @@ nvim-config:
 		curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
 	curl -sS https://webi.sh/vim-devicons | sh
 	mkdir -p ~/.config/nvim
-	cp -a ./configs/nvim/. ~/.config/nvim/
+	cp -a ../configs/nvim/. ~/.config/nvim/
 
 vscode:
 	sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -115,14 +115,14 @@ vscode:
 	sudo dnf install code
 
 ideavim:
-	cp configs/idea/.ideavimrc ~/.ideavimrc
+	cp ../configs/idea/.ideavimrc ~/.ideavimrc
 
 helix:
 	sudo dnf install helix
-	cp -r configs/helix ~/.config/helix
+	cp -r ../configs/helix ~/.config/helix
 
 k9s:
-	cp -ra configs/k9s/. ~/.config/k9s
+	cp -ra ../configs/k9s/. ~/.config/k9s
 
 bruno:
 	flatpak install flathub com.usebruno.Bruno
