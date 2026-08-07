@@ -87,3 +87,7 @@ vim.keymap.set("n", "<leader>rh", function()
   if vim.bo.filetype == "haskell" then run_file() else vim.notify("Não é um arquivo Haskell!", vim.log.levels.WARN) end
 end, { desc = "Rodar Haskell" })
 
+-- Recarregar o arquivo atual do disco com <leader>ur (Space + u + r)
+vim.keymap.set("n", "<leader>ur", "<cmd>edit!<cr>", { desc = "Recarregar arquivo (Reload)" })
+
+

@@ -85,7 +85,10 @@ A sua configuração do Neovim ([configs/nvim](file:///Users/betinho_pc/local-en
   - `<leader>e` ou `<leader>fe` para abrir/fechar o gerenciador de arquivos.
 * **Visualização de Git Blame**:
   - `<leader>gt` para alternar a exibição da linha de blame do Git.
+* **Recarregar do Disco**:
+  - `<leader>ur` para forçar o recarregamento do arquivo atual do disco (caso tenha sido modificado externamente por outra ferramenta/LLM).
 * **Executores de Código (Code Runners)**:
+
   - `<leader>rf` para salvar e rodar o arquivo atual detectando a linguagem automaticamente.
   - `<leader>rp`, `<leader>rg`, `<leader>rr`, `<leader>rj`, `<leader>rh` para rodar especificamente **Python**, **Go**, **Rust**, **Java** e **Haskell**, respectivamente.
   - *Nota: O terminal flutuante pausa após a execução, permitindo visualizar os outputs/erros e fecha ao pressionar `Enter`.*
