@@ -40,7 +40,7 @@ return {
       -- Find in project / Grep (Cmd+Shift+F)
       { "<D-S-f>", function() Snacks.picker.grep() end, desc = "Grep (Find in Files)", mode = "n" },
       -- Quick Open / Go to File (Cmd+P)
-      { "<D-p>", function() Snacks.picker.smart() end, desc = "Go to File (Smart)", mode = "n" },
+      { "<D-p>", function() Snacks.picker.files() end, desc = "Go to File", mode = "n" },
       -- Command Palette (Cmd+Shift+P)
       { "<D-S-p>", "<cmd>lua Snacks.picker.commands()<cr>", desc = "Command Palette", mode = "n" },
 
